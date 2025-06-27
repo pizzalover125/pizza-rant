@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Pizza Clicker</title>
+    <style>
+        html {
+            background-color: #EE4540;
+            text-align: center;
+        }
+
+        #pizzaButton {
+            background: none;
+            border: none;
+            box-shadow: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 20vh;
+            width: 100vw;
+        }
+
+        h1, p, a {
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 5vh;
+            margin-top: 20px;
+        }
+
+        #clickLabel {
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 2vh;
+            margin-top: 20px;
+        }
+
+        .upgradeButton {
+            background-color: #fff;
+            color: #EE4540;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-size: 2vh;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #resetButton {
+            background-color: #fff;
+            color: #EE4540;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-size: 2vh;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        #stats {
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 2vh;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ilovepizzas</h1>
+    <p id="clickLabel">0</p>
+    <div id="stats">
+        Multiplier: <span id="multiplierLabel">1</span> | CPS: <span id="cpsLabel">0</span>
+    </div>
+    <button id="pizzaButton">🍕</button>
+    <br>
+    <button class="upgradeButton" id="multiplierButton">
+    Upgrade Multiplier (+1/click) - Cost: 10
+    </button>
+    <button class="upgradeButton" id="cpsButton">
+        Upgrade CPS (+1/sec) - Cost: 50
+    </button>
+    <br>
+    <button id="resetButton">Reset</button>
+    <a href="instructions.html">Instructions</a>
+    <script>
+    let clicks = 0;
+    let multiplier = 1;
+    let cps = 0;
+
+    const clickLabel = document.getElementById('clickLabel');
+    const multiplierLabel = document.getElementById('multiplierLabel');
+    const cpsLabel = document.getElementById('cpsLabel');
+
+    const MULTIPLIER_COST = 10;
+    const CPS_COST = 50;
+
+    document.getElementById('pizzaButton').addEventListener('click', function() {
+        clicks += multiplier;
+        clickLabel.textContent = clicks;
+    });
+
+    document.getElementById('multiplierButton').addEventListener('click', function() {
+        if (clicks >= MULTIPLIER_COST) {
+            clicks -= MULTIPLIER_COST;
+            multiplier += 1;
+            clickLabel.textContent = clicks;
+            multiplierLabel.textContent = multiplier;
+        } else {
+            alert('Not enough clicks for multiplier upgrade');
+        }
+    });
+
+    document.getElementById('cpsButton').addEventListener('click', function() {
+        if (clicks >= CPS_COST) {
+            clicks -= CPS_COST;
+            cps += 1;
+            clickLabel.textContent = clicks;
+            cpsLabel.textContent = cps;
+        } else {
+            alert('Not enough clicks for CPS upgrade');
+        }
+    });
+
+    document.getElementById('resetButton').addEventListener('click', function() {
+        clicks = 0;
+        multiplier = 1;
+        cps = 0;
+        clickLabel.textContent = clicks;
+        multiplierLabel.textContent = multiplier;
+        cpsLabel.textContent = cps;
+    });
+
+    setInterval(function() {
+        if (cps > 0) {
+            clicks += cps;
+            clickLabel.textContent = clicks;
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>

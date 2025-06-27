@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Pizza Clicker</title>
+    <style>
+        html {
+            background-color: #EE4540;
+            text-align: center;
+        }
+
+        h1, p {
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 5vh;
+            margin-top: 20px;
+            transition: all 0.5s;
+        }
+
+        .spin {
+            animation: spin 1s linear;
+        }
+        
+        @keyframes spin {
+            100% { transform: rotate(360deg);}
+        }
+        
+        .rainbow {
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0);}
+            20% { transform: translateX(-10px);}
+            40% { transform: translateX(10px);}
+            60% { transform: translateX(-10px);}
+            80% { transform: translateX(10px);}
+            100% { transform: translateX(0);}
+        }
+
+        .grow {
+            transform: scale(1.5);
+        }
+
+        .fade {
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body>
+    <h1>ilovepizzas</h1>
+    <div>
+        <p id="p1">Instructions (click each p tag for a funky effect!)</p>
+        <p id="p2">Click the pizza to earn points.</p>
+        <p id="p3">Use the upgrades to increase your clicks per second and multiplier.</p>
+        <p id="p4">Reset to start over with a fresh score.</p>
+        <p id="p5">Enjoy the game!</p>
+    </div>
+    <script>
+        document.getElementById('p1').onclick = function() {
+            this.classList.add('spin');
+            setTimeout(() => this.classList.remove('spin'), 1000);
+        };
+        document.getElementById('p2').onclick = function() {
+            this.classList.toggle('rainbow');
+        };
+        document.getElementById('p3').onclick = function() {
+            this.classList.add('shake');
+            setTimeout(() => this.classList.remove('shake'), 500);
+        };
+        document.getElementById('p4').onclick = function() {
+            this.classList.add('grow');
+            setTimeout(() => this.classList.remove('grow'), 500);
+        };
+        document.getElementById('p5').onclick = function() {
+            this.classList.add('fade');
+            setTimeout(() => this.classList.remove('fade'), 700);
+        };
+    </script>
+</body>
+</html>
